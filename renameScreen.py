@@ -1,7 +1,6 @@
 import datetime as dt
 import os
 import natsort
-import shutil
 import re
 
 start_directory = r'D://Ionki/Screen/'
@@ -10,9 +9,13 @@ end_directory = r'D://Ionki/'
 while True:
     
     try:
+        
         # Если папка со скриншотами пустая, программа дальше не выполняется
         if len(os.listdir(start_directory)) == 0:
             print("Папка со скриншотами пуста. Ошибка: 005")
+            
+            print('Нажмите "Enter", чтобы завершить.')
+            input()
             break
         
         screenshots = os.listdir(start_directory)
@@ -22,8 +25,12 @@ while True:
         for scshot in screenshots:
             if(scshot.endswith('.gif')):
                 j=j+1
+                
         if(j == 0):
             print('Остутствуют файлы с расширением .gif. Ошибка: 006')
+            
+            print('Нажмите "Enter", чтобы завершить.')
+            input()
             break
 
        
@@ -50,9 +57,15 @@ while True:
         # Условия, если формат даты и времени не прошёл проверку
         if(check_date == None):
             print('Введённая дата не соответствует формату. Ошибка: 002')
+            
+            print('Нажмите "Enter", чтобы завершить.')
+            input()
             break
         if(check_time == None):
             print('Введённое время не соответствует формату. Ошибка: 003')
+            
+            print('Нажмите "Enter", чтобы завершить.')
+            input()
             break        
         
         # Выделение года, месяца, дня и времени из введённых значений 
@@ -65,11 +78,12 @@ while True:
         
         
         
-        print(date, time)
+        #print(date, time)
         
         # Создание даты и времени первого скриншота
         start_datetime = dt.datetime(year = int(Year_s), month = int(Month_s), 
                                 day = int(Day_s), hour = int(Hour_s), minute = int(Minute_s))
+        
         print('start_datetime: ', start_datetime)
         
         scshot_datetime = start_datetime
@@ -77,7 +91,7 @@ while True:
         iteration_time = dt.timedelta(minutes = 15)
               
 
-        print(screenshots[:3], screenshots[-3:])
+        #print(screenshots[:3], screenshots[-3:])
 
         for scshot in screenshots:
             # Условие, которое говорит использовать только файлы с расширением .gif
@@ -87,10 +101,10 @@ while True:
                 if(scshot_datetime.year > start_datetime.year):
                     start_datetime = scshot_datetime
                     
-                    year_dir = r'D://Ionki/' + scshot_datetime.strftime('%Y') + '/'
-                    month_dir = (r'D://Ionki/' + scshot_datetime.strftime('%Y') + '/' 
+                    year_dir = end_directory + scshot_datetime.strftime('%Y') + '/'
+                    month_dir = (end_directory + scshot_datetime.strftime('%Y') + '/'
                          + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/')
-                    final_dir = (r'D://Ionki/' + scshot_datetime.strftime('%Y') + '/' 
+                    final_dir = (end_directory + scshot_datetime.strftime('%Y') + '/'
                          + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/' 
                          + scshot_datetime.strftime('%d') + '_' + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/')
                     
@@ -118,10 +132,10 @@ while True:
                 elif(scshot_datetime.month > start_datetime.month):
                     start_datetime = scshot_datetime
                     
-                    year_dir = r'D://Ionki/' + scshot_datetime.strftime('%Y') + '/'
-                    month_dir = (r'D://Ionki/' + scshot_datetime.strftime('%Y') + '/' 
+                    year_dir = end_directory + scshot_datetime.strftime('%Y') + '/'
+                    month_dir = (end_directory + scshot_datetime.strftime('%Y') + '/'
                          + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/')
-                    final_dir = (r'D://Ionki/' + scshot_datetime.strftime('%Y') + '/' 
+                    final_dir = (end_directory + scshot_datetime.strftime('%Y') + '/'
                          + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/' 
                          + scshot_datetime.strftime('%d') + '_' + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/')
                     
@@ -149,10 +163,10 @@ while True:
                 elif(scshot_datetime.day > start_datetime.day):
                     start_datetime = scshot_datetime
                     
-                    year_dir = r'D://Ionki/' + scshot_datetime.strftime('%Y') + '/'
-                    month_dir = (r'D://Ionki/' + scshot_datetime.strftime('%Y') + '/' 
+                    year_dir = end_directory + scshot_datetime.strftime('%Y') + '/'
+                    month_dir = (end_directory + scshot_datetime.strftime('%Y') + '/'
                          + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/')
-                    final_dir = (r'D://Ionki/' + scshot_datetime.strftime('%Y') + '/' 
+                    final_dir = (end_directory + scshot_datetime.strftime('%Y') + '/'
                          + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/' 
                          + scshot_datetime.strftime('%d') + '_' + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/')
                     
@@ -180,11 +194,11 @@ while True:
                     
                 else:
                     
-                    year_dir = r'D://Ionki/' + scshot_datetime.strftime('%Y') + '/'
-                    month_dir = (r'D://Ionki/' + scshot_datetime.strftime('%Y') + '/' 
+                    year_dir = end_directory + scshot_datetime.strftime('%Y') + '/'
+                    month_dir = (end_directory + scshot_datetime.strftime('%Y') + '/'
                          + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/')
-                    final_dir = (r'D://Ionki/' + scshot_datetime.strftime('%Y') + '/' 
-                         + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/' 
+                    final_dir = (end_directory + scshot_datetime.strftime('%Y') + '/'
+                         + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/'
                          + scshot_datetime.strftime('%d') + '_' + scshot_datetime.strftime('%m') + '_' + scshot_datetime.strftime('%Y') + '/')
                     
                     if(os.path.exists(year_dir) != True):
@@ -208,11 +222,18 @@ while True:
                         print("Переименовано из %s в %s" % (old_name, new_name))
                         os.rename(old_name, new_name)
            
-            scshot_datetime = scshot_datetime + iteration_time     
-        
+                scshot_datetime = scshot_datetime + iteration_time     
+            
+
+        print('Нажмите "Enter", чтобы завершить.')
+        input()
         break
 
-    except:
-        print('Ошибка: 001')
+    except Exception as e:
+
+        print('Ошибка: %s' % (e))
+        
+        print('Нажмите "Enter", чтобы завершить.')
+        input()
         break
 
